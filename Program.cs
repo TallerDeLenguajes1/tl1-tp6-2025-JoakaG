@@ -20,21 +20,21 @@ do
 Console.WriteLine("Finalizando programa...");
 void FuncionIngresarNumeros(int opcion)
 {
-    Console.WriteLine("Ingresa el primer número entero");
+    Console.WriteLine("Ingresa el primer número (en caso de necesitar separador decimal utilizar ,)");
     string ingreso1 = Console.ReadLine();
-    Console.WriteLine("Ingresa el segundo número entero");
+    Console.WriteLine("Ingresa el segundo número (en caso de necesitar separador decimal utilizar ,)");
     string ingreso2 = Console.ReadLine();
-    if (int.TryParse(ingreso1, out int numero1) && int.TryParse(ingreso2, out int numero2))
+    if (float.TryParse(ingreso1, out float numero1) && float.TryParse(ingreso2, out float numero2))
     {
         realizarOperacion(numero1, numero2, opcion);
     }
     else
     {
-        Console.WriteLine("\n\nUno o los dos datos ingresados no son números enteros\n\n");
+        Console.WriteLine("\n\nUno o los dos datos ingresados no son números\n\n");
     }
 }
 
-void realizarOperacion(int numero1, int numero2, int opcion)
+void realizarOperacion(float numero1, float numero2, int opcion)
 {
     switch (opcion)
     {
@@ -56,22 +56,22 @@ void realizarOperacion(int numero1, int numero2, int opcion)
 }
 
 
-void FuncionSumar(int a, int b)
+void FuncionSumar(float a, float b)
 {
     Console.WriteLine("\n\nResultado de " + a + "+" + b + ": " + (a + b));
 }
 
-void FuncionRestar(int a, int b)
+void FuncionRestar(float a, float b)
 {
     Console.WriteLine("\n\nResultado de " + a + "-" + b + ": " + (a - b));
 }
 
-void FuncionMultiplicar(int a, int b)
+void FuncionMultiplicar(float a, float b)
 {
     Console.WriteLine("\n\nResultado de " + a + "*" + b + ": " + (a * b));
 }
 
-void FuncionDividir(int a, int b)
+void FuncionDividir(float a, float b)
 {
     if (b != 0)
     {
