@@ -43,7 +43,8 @@ RecorrerString(cadena);
 IndexOf(cadenaIngresada);
 MayusculasYMinusculas(cadenaIngresada);
 splitt(cadena);
-
+calculadorabasica();
+calculadoraSospechosa();
 
 void LargoDeCadena(string cadenaIngresada)
 {
@@ -99,5 +100,164 @@ void splitt(string cadena)
     }
 }
 
+int opcion = -1;
 
+void calculadorabasica()
+{
+    do
+    {
+        Console.WriteLine("\nSeleccione acción a realizar\n 1. Sumar\n 2. Resta\n 3.Multiplicar\n 4.Dividir \n 0. Salir");
+        if (int.TryParse(Console.ReadLine(), out opcion) && opcion != 0 && opcion < 5)
+        {
+            FuncionIngresarNumeros(opcion);
+        }
+        else
+        {
+            opcion = 0;
+        }
+    } while (opcion > 0 && opcion < 5);
 
+}
+
+void FuncionIngresarNumeros(int opcion)
+{
+    Console.WriteLine("Ingresa el primer número (en caso de necesitar separador decimal utilizar ,)");
+    string ingreso1 = Console.ReadLine();
+    Console.WriteLine("Ingresa el segundo número (en caso de necesitar separador decimal utilizar ,)");
+    string ingreso2 = Console.ReadLine();
+    if (float.TryParse(ingreso1, out float numero1) && float.TryParse(ingreso2, out float numero2))
+    {
+        realizarOperacion(numero1, numero2, opcion);
+    }
+    else
+    {
+        Console.WriteLine("\n\nUno o los dos datos ingresados no son números\n\n");
+    }
+}
+
+void realizarOperacion(float numero1, float numero2, int opcion)
+{
+    switch (opcion)
+    {
+        case 1:
+            FuncionSumar(numero1, numero2);
+            break;
+        case 2:
+            FuncionRestar(numero1, numero2);
+            break;
+        case 3:
+            FuncionMultiplicar(numero1, numero2);
+            break;
+        case 4:
+            FuncionDividir(numero1, numero2);
+            break;
+        case 5:
+            FuncionMin(numero1, numero2);
+            break;
+        case 6:
+            FuncionMax(numero1, numero2);
+            break;
+        default:
+            break;
+    }
+}
+
+void FuncionSumar(float a, float b)
+{
+    Console.WriteLine($"\n\nResultado de {a}+{b}: " + (a + b).ToString());
+}
+
+void FuncionRestar(float a, float b)
+{
+    Console.WriteLine($"\n\nResultado de {a}-{b}: " + (a - b).ToString());
+}
+
+void FuncionMultiplicar(float a, float b)
+{
+    Console.WriteLine($"\n\nResultado de {a}*{b}: " + (a * b).ToString());
+}
+
+void FuncionDividir(float a, float b)
+{
+    if (b != 0)
+    {
+        Console.WriteLine($"\n\nResultado de {a}/{b}: " + (a / b).ToString());
+    }
+    else
+    {
+        Console.WriteLine($"\n\nERROR{a}/0 INDEFINIDO\n\n");
+    }
+}
+
+void FuncionMax(float a, float b)
+{
+    if (a > b)
+    {
+        Console.WriteLine("\n\n Número mayor: " + a);
+    }
+    else
+    {
+        Console.WriteLine("\n\n Número mayor: " + b);
+    }
+}
+
+void FuncionMin(float a, float b)
+{
+    if (a > b)
+    {
+        Console.WriteLine("\n\n Número menor: " + b);
+    }
+    else
+    {
+        Console.WriteLine("\n\n Número menor: " + a);
+    }
+}
+
+void calculadoraSospechosa()
+{
+    Console.WriteLine("Ingresar operación basica a realizar (+, -, *, /, <, >)");
+    string Operacion = Console.ReadLine();
+    char[] Operadores = { '+', '-', '*', '/', '<', '>' };
+    int posicion = -1;
+    int opcion = -1;
+    float numero1 = 0;
+    float numero2 = 0;
+    foreach (char Operador in Operadores)
+    {
+        posicion = Operacion.IndexOf(Operador);
+        if (posicion != -1)
+        {
+            if (float.TryParse(Operacion.Substring(0, posicion), out numero1) && float.TryParse(Operacion.Substring(posicion + 1), out numero2))
+            {
+                switch (Operacion[posicion])
+                {
+                    case '+':
+                        FuncionSumar(numero1, numero2);
+                        break;
+                    case '-':
+                        FuncionRestar(numero1, numero2);
+                        break;
+                    case '*':
+                        FuncionMultiplicar(numero1, numero2);
+                        break;
+                    case '/':
+                        FuncionDividir(numero1, numero2);
+                        break;
+                    case '<':
+                        FuncionMin(numero1, numero2);
+                        break;
+                    case '>':
+                        FuncionMax(numero1, numero2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            break;
+        }
+    }
+    if (posicion == -1)
+    {
+            Console.WriteLine("Operacion Ingresada NO válida.\n Finalizando Programa....");
+    }
+}
